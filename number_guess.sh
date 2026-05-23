@@ -23,9 +23,11 @@ echo -n "Guess the secret number between 1 and 1000:"
 while true
 do
   read PLAYER_INPUT
+  GUESS=$(( GUESS + 1 ))
   if [[ ! $PLAYER_INPUT =~ ^[0-9]+$ ]]
   then
     echo -n "That is not an integer, guess again:"
+    GUESS=$(( GUESS - 1 ))
   elif [[ $PLAYER_INPUT -gt $SECRET_NUMBER ]]
   then
     echo -n "It's lower than that, guess again:"
@@ -33,7 +35,6 @@ do
   then
     echo -n "It's higher than that, guess again:"
   else
-    GUESS=$(( GUESS + 1 ))
     break
   fi
 done
