@@ -39,3 +39,6 @@ do
 done
 
 echo "You guessed it in $GUESS tries. The secret number was $SECRET_NUMBER. Nice job!"
+
+USER_ID=$($PSQL "SELECT user_id FROM users WHERE username='$USERNAME'")
+SAVE_GAME=$($PSQL "INSERT INTO games(user_id, number_generated, number_guesses) VALUES ($USER_ID, $SECRET_NUMBER, $GUESS)") > /dev/null
