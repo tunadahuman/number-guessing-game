@@ -19,3 +19,23 @@ fi
 SECRET_NUMBER=$(( RANDOM % 1000 + 1 ))
 GUESS=0
 echo -n "Guess the secret number between 1 and 1000:"
+
+while true
+do
+  read PLAYER_INPUT
+  if [[ ! $PLAYER_INPUT =~ ^[0-9]+$ ]]
+  then
+    echo -n "That is not an integer, guess again:"
+  elif [[ $PLAYER_INPUT -gt $SECRET_NUMBER ]]
+  then
+    echo -n "It's lower than that, guess again:"
+  elif [[ $PLAYER_INPUT -lt $SECRET_NUMBER ]]
+  then
+    echo -n "It's higher than that, guess again:"
+  else
+    GUESS=$(( GUESS + 1 ))
+    break
+  fi
+done
+
+echo "You guessed it in $GUESS tries. The secret number was $SECRET_NUMBER. Nice job!"
